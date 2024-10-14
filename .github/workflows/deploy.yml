@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -20,8 +20,6 @@ jobs:
         run: npm install
       - name: Build dist
         run: npm run build
-      - name: List files after build
-        run: ls -R
       - name: Setup pages
         uses: actions/configure-pages@v3
       - name: Upload dist folder
