@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage.tsx";
 
 function App() {
   return (
