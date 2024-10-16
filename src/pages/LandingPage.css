@@ -1,0 +1,24 @@
+.mainContainer {
+  width: 390px;
+  height: 844px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: linear-gradient(180deg, #3f6bc0 0%, #3fb1c0 100%);
+}
+
+.boxsize {
+  height: 100vh;
+}
+
+.AhaBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.smileyBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
