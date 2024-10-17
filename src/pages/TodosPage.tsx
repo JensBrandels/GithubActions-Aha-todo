@@ -1,36 +1,59 @@
 import AhaLogo from "../assets/Aha!.svg";
 import TodoItem from "../components/TodoItem";
+import AddLogo from "../assets/add.svg";
 import { useState } from "react";
+import "./TodosPage.css";
+
+//defining the Todo type
+type Todo = {
+  text: string;
+  completed: boolean;
+};
 
 const TodosPage = () => {
-  const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState<string>("");
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = (todos, setTodos) => {
-    if (newTodo.trim() === "") return;
-    setTodos([...todos, { text: newTodo, completed: false }]);
+  // function to check if a todo is less than 25 characters
+  const handleAddTodo = () => {
+    if (newTodo.length <= 30) {
+      addTodo(newTodo);
+    } else {
+      alert("Text cannot exceed 25 characters.");
+    }
+  };
+
+  // Function to actually add the todo to the state
+  const addTodo = (todoText: string) => {
+    if (todoText.trim() === "") return; // Prevent adding empty todos
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { text: todoText, completed: false },
+    ]);
     setNewTodo("");
   };
 
-  const handleCheckBoxChange = (index) => {
+  // Function to toggle completion state of a todo
+  const handleCheckBoxChange = (index: number) => {
     const updatedTodos = todos.map((todo, i) =>
-      i === index ? { ...todos, completed: !todo.completed } : todo
+      i === index ? { ...todo, completed: !todo.completed } : todo
     );
-    setTodos(updatedTodos);
+    setTodos(updatedTodos); // Update the state
   };
 
-  const handleDelete = (index) => {
+  // Function to delete a todo
+  const handleDelete = (index: number) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
-    setTodos(updatedTodos);
+    setTodos(updatedTodos); // Update the state
   };
 
   return (
     <>
       <div className="todoMainContainer">
-        <header>
+        <header className="todoHeader">
           <img src={AhaLogo} alt="" />
         </header>
-        <div>
+        <div className="todos">
           <ul>
             {todos.map((todo, index) => (
               <TodoItem
@@ -43,7 +66,7 @@ const TodosPage = () => {
             ))}
           </ul>
         </div>
-        <footer>
+        <footer className="todoFooter">
           <input
             type="text"
             name=""
@@ -51,12 +74,8 @@ const TodosPage = () => {
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
           />
-          <p
-            onClick={() => {
-              addTodo(todos, setTodos);
-            }}
-          >
-            +
+          <p onClick={handleAddTodo}>
+            <img src={AddLogo} alt="" />
           </p>
         </footer>
       </div>

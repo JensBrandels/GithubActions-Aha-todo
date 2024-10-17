@@ -1,7 +1,8 @@
 import React from "react";
+import RemoveLogo from "../assets/remove.png";
 
 type TodoItemProps = {
-  text: String;
+  text: string;
   completed: boolean;
   onCheckboxChange: () => void;
   onDelete: () => void;
@@ -17,9 +18,9 @@ const TodoItem: React.FC<TodoItemProps> = ({
     <li className="todoItem">
       <input type="checkbox" checked={completed} onChange={onCheckboxChange} />
       <span className={completed ? "completed" : ""}>{text}</span>
-      <button className="deleteButton" onClick={onDelete}>
-        🗑️
-      </button>
+      <p className="deleteButton" onClick={onDelete}>
+        <img src={RemoveLogo} alt="" />
+      </p>
     </li>
   );
 };
